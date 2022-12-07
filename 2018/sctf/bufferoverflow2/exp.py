@@ -29,7 +29,7 @@ def lg(s,addr):
     print('\033[1;31;40m%20s-->0x%x\033[0m'%(s,addr))
 
 def raddr(a,l=None):
-    if l==None:
+    if l is None:
         return u64(rv(a).ljust(8,'\x00'))
     else:
         return u64(rl().strip('\n').ljust(8,'\x00'))
@@ -47,15 +47,15 @@ def free(index):
 
 def fill(content):
     k=len(content)
-    if(content[k-1]=='\n'):
+    if (content[k-1]=='\n'):
         choice(3)
         sa(': ','A'*(k)+'\n')
-        k=k-1 
+        k -= 1
     while k>1:
         if content[k-1]=='\x00':
             choice(3)
             sa(': ','A'*(k-1)+'\n')
-            k=k-1
+            k -= 1
         else:
             left=k
             while content[left-1]!='\x00' and left>1:

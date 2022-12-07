@@ -29,7 +29,7 @@ def lg(s,addr):
     print('\033[1;31;40m%20s-->0x%x\033[0m'%(s,addr))
 
 def raddr(a,l=None):
-    if l==None:
+    if l is None:
         return u64(rv(a).ljust(8,'\x00'))
     else:
         return u64(rl().strip('\n').ljust(8,'\x00'))

@@ -53,15 +53,11 @@ def print_entry(name):
 
 def getcheck(idx):
     global payload
-    res=''
-    if idx<12:
-        payloads=os.popen("python more.py "+str(idx)).read().strip('\n')
-        payloads=payloads.split(' + ')
-        for i in payloads:
-            res+=p8(int(i))
-    else:
+    if idx >= 12:
         return payload[(idx-12)*6:(idx-12)*6+6]
-    return res
+    payloads = os.popen(f"python more.py {str(idx)}").read().strip('\n')
+    payloads=payloads.split(' + ')
+    return ''.join(p8(int(i)) for i in payloads)
 
 if __name__ == '__main__':
     thename='\xa1\xf8\xe6\xa9'

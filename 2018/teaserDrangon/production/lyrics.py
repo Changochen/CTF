@@ -43,18 +43,18 @@ def _close(idx):
     sla("ID: ",str(idx))
 
 if __name__ == '__main__':
-    for i in xrange(16):
+    for _ in xrange(16):
         _open("..",'lyrics')
 
-    for i in xrange(16):
-        for j in xrange(24):
+    for _ in xrange(16):
+        for _ in xrange(24):
             _read(0)
-    
-    for i in xrange(12):
+
+    for _ in xrange(12):
         _open('The Beatles','Girl')
 
     _open("..",'flag')
-    for i in xrange(31):
+    for _ in xrange(31):
         _read(0)
     _read(12)
     _read(0)
